@@ -37,6 +37,7 @@ def get_base(content):
             Nav(
                 Div(
                     A("Home", href="/", cls="nav-link"),
+                    A("Resume",href="/resume", cls="nav-link"),
                     #A("Posts", href="/posts", cls="nav-link"),
                     #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
@@ -90,6 +91,11 @@ def home():
     with open('main.md', 'r') as file:
         content = file.read()
     return get_base(Markdown(content))
+
+
+@app.get("/resume")
+def get_resume():
+    return RedirectResponse(url="/assets/resume2024.pdf") 
 
 
 '''@app.get("/posts/")
