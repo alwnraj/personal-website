@@ -7,6 +7,8 @@ draft: False
 
 # How FastHTML sparked my joy in web development
 
+
+
 I've been wanting to create a personal site for a while now. 
 Nowadays, there are basically two options: Either build a full-scale web project with JavaScript/TypeScript and React/NextJS or using a static site generator like Jekyll or Hugo. 
 The first option can become overwhelmingly complex, especially for someone like me, who is not a web developer.

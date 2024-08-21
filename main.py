@@ -10,8 +10,13 @@ headers = (
         rel="stylesheet",
         type="text/css",
     ),
+    Link(  # Add the favicon link
+        rel="icon",
+        type="image/jpeg",
+        href="/assets/logo.jpg",
+    ),
     StyleX("assets/styles.css"),
-    *Socials(title="Alwin Rajkumar", description="Alwin's Personal Site", site_name="github.com/alwnraj", image="", url=""),
+    *Socials(title="Alwin Rajkumar", description="Alwin's Personal Site", site_name="Alwin's Personal Site", image="assets/profile_picture.jpeg", url="https://personal-website-cyan-omega.vercel.app/"),
     Meta(name="viewport", content="width=device-width, initial-scale=1, viewport-fit=cover"),
     Meta(charset="utf-8"),
 )
@@ -38,7 +43,7 @@ def get_base(content):
                 Div(
                     A("Home", href="/", cls="nav-link"),
                     A("Resume",href="/resume", cls="nav-link"),
-                    #A("Posts", href="/posts", cls="nav-link"),
+                    #A("Projects", href="/projects", cls="nav-link"),
                     #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
                 ),
@@ -98,7 +103,7 @@ def get_resume():
     return RedirectResponse(url="/assets/resume2024.pdf") 
 
 
-'''@app.get("/posts/")
+'''@app.get("/projects/")
 def posts():
     blog_dir = pathlib.Path("posts")
     blog_files = [file.stem for file in blog_dir.glob("*.md")]
@@ -108,8 +113,8 @@ def posts():
             content = frontmatter.load(post_file)
             if not content["draft"]:
                 links.append(Li(content["date"], A(content["title"], href=f"/posts/{file}")))
-    return get_base(Div(H2("Posts"), Ul(*links)))
-'''
+    return get_base(Div(H2("Posts"), Ul(*links)))'''
+
 
 '''@app.get("/papers/")
 def papers():
@@ -150,8 +155,6 @@ def papers():
          ))
     )'''
 
-'''@app.get("/resume")
-def get_resume(resume2024.pdf)'''
 
 
 '''@app.get("/posts/{post}")
