@@ -42,7 +42,7 @@ def get_base(content):
             Nav(
                 Div(
                     A("Home", href="/", cls="nav-link"),
-                    A("Resume",href="/assets/resume2024.pdf", cls="nav-link", target="_blank"),
+                    A("Resume",href="/assets/AlwinResume2024.pdf", cls="nav-link", target="_blank"),
                     #A("Projects", href="/projects", cls="nav-link"),
                     #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
@@ -100,7 +100,7 @@ def home():
 
 '''@app.get("/resume")
 def get_resume():
-    return RedirectResponse(url="/assets/resume2024.pdf") '''
+    return RedirectResponse(url="/assets/AlwinResume2024.pdf") '''
 
 
 '''@app.get("/projects/")
