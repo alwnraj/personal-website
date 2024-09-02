@@ -98,11 +98,6 @@ def home():
     return get_base(Markdown(content))
 
 
-'''@app.get("/resume")
-def get_resume():
-    return RedirectResponse(url="/assets/AlwinResume2024.pdf") '''
-
-
 '''@app.get("/projects/")
 def posts():
     blog_dir = pathlib.Path("posts")
