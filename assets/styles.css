@@ -43,19 +43,22 @@ body {
     margin-bottom: 30px;
 }
 
+
 .profile-image {
-    width: 130px;
-    height: 130px;
     border-radius: 50%;
+    width: 150px;
+    height: auto; /* Ensure the height adjusts automatically */
     object-fit: cover;
-    margin-right: 30x;
-    
+    margin-top: 15px;
+    margin-right: 20px;
+    max-width: 100%; /* Prevent the image from stretching larger than its container */
 }
 
 .profile-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 20px; /* Add space between profile picture and text */
 }
 
 .profile-info h1 {
@@ -88,6 +91,16 @@ body {
     padding: 30px;
 }
 
+@media (max-width: 600px) {
+    .profile-image {
+        width: 120px; /* Smaller width for mobile */
+        height: auto; /* Ensure the height adjusts automatically */
+    }
+    .profile-info {
+        margin-left: 30px; /* Increase space for mobile screens */
+    }
+}
+
 h2 {
     font-size: 24px;
     color: #ffffff;
@@ -96,6 +109,7 @@ h2 {
 
 p {
     font-size: 16px;
+    margin-left: 20px;
 }
 
 /* courier-prime-regular - latin */
