@@ -20,4 +20,4 @@ delivering a retro gaming experience. [Source Code](https://www.github.com/alwnr
 **2D Retro Space Invaders Game in C++:**  
 Independently designed and developed a fully functional
 2D Retro Space Invaders game in C++ using Raylib, without the use of game engines. Created all game mechanics, including collision detection, scoring systems, and game physics
-  [Source Code](https://www.github.com/alwnraj/Space-invaders)
+[Source Code](https://www.github.com/alwnraj/Space-invaders)
