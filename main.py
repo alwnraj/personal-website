@@ -57,7 +57,7 @@ def get_base(content):
                 ),
                 Div(
                     H1("Alwin Rajkumar"),
-                    P("University of Louisville | Speed School of Engineering"),
+                    P("University of Louisville | Computer Science & Engineering"),
                     Div(
                         #Icon("fab fa-x-twitter fa-sm", href="www.twitter.com/xceron_", button=False),
                         Icon("fab fa-github fa-sm", href="https://github.com/alwnraj?tab=overview&from=2024-07-01&to=2024-07-04", button=False),
