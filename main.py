@@ -43,7 +43,7 @@ def get_base(content):
                 Div(
                     A("Home", href="/", cls="nav-link"),
                     A("Resume",href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
-                    #A("Projects", href="/projects", cls="nav-link"),
+                    A("Posts", href="/posts", cls="nav-link"),
                     #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
                 ),
@@ -98,7 +98,7 @@ def home():
     return get_base(Markdown(content))
 
 
-'''@app.get("/projects/")
+@app.get("/posts/")
 def posts():
     blog_dir = pathlib.Path("posts")
     blog_files = [file.stem for file in blog_dir.glob("*.md")]
@@ -108,7 +108,18 @@ def posts():
             content = frontmatter.load(post_file)
             if not content["draft"]:
                 links.append(Li(content["date"], A(content["title"], href=f"/posts/{file}")))
-    return get_base(Div(H2("Posts"), Ul(*links)))'''
+    return get_base(Div(H2("Posts"), Ul(*links)))
+
+
+@app.get("/posts/{post}")
+def get_post(post: str):
+    post_path = pathlib.Path(f"posts/{post}.md")
+    if not post_path.exists():
+        return RedirectResponse(url="/")
+    md_file = frontmatter.load(post_path)
+    if md_file["draft"]:
+        return RedirectResponse(url="/")
+    return get_base(Markdown(md_file.content))
 
 
 '''@app.get("/papers/")
@@ -151,17 +162,6 @@ def papers():
     )
     '''
 
-
-
-'''@app.get("/posts/{post}")
-def get_post(post: str):
-    post_path = pathlib.Path(f"posts/{post}.md")
-    if not post_path.exists():
-        return RedirectResponse(url="/")
-    md_file = frontmatter.load(post_path)
-    if md_file["draft"]:
-        return RedirectResponse(url="/")
-    return get_base(Markdown(md_file.content))'''
 
 
 if __name__ == "__main__":
