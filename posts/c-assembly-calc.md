@@ -1,7 +1,7 @@
 ---
 title: Simple calculator in C and Assembly.
 categories: [web, resources]
-date: 09-05-2024
+date: 09-13-2024
 draft: false
 ---
 ## Simple calculator in C and Assembly
