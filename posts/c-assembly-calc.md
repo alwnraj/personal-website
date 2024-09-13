@@ -6,8 +6,8 @@ draft: false
 ---
 ## Simple calculator in C and Assembly
 
-
 This is the C code for the fronted, should be under 'main.c'
+
 ```C
 #include <stdio.h>
 
