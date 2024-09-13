@@ -59,10 +59,15 @@ int main() {
         case 4:
             if (b == 0) {
                 printf("Error: Division by zero is not allowed.\n");
-            }
-            else {
-                result = divide(a, b);
-                printf("Result: %d\n", result);
+            } else {
+                printf("Calling divide function...\n");
+                result = divide(a, b, &remainder);   // Pass address of remainder
+                if (result == -1) {
+                    printf("Error: Division by zero occurred.\n");
+                } else {
+                    printf("Quotient: %d, Remainder: %d\n", result, remainder);
+                }
+                printf("Returned from divide function...\n");
             }
             break;
         default:
@@ -101,10 +106,26 @@ multiply:
     BX lr               // Return
 
 // Divide Function (with integer division)
+    .section .text
+    .global divide
+
+// Divide Function
+// r0 -> dividend
+// r1 -> divisor
+// r2 -> pointer to store remainder
+
 divide:
-    MOV r2, r0          // Move dividend to r2
-    MOV r0, r0          // Ensure r0 holds the dividend for return
-    BL __aeabi_idiv     // Call integer division routine
-    BX lr               // Return
+    CMP r1, #0          // Check if divisor is zero
+    BEQ divide_by_zero  // Branch if divisor is zero (avoid division by zero)
+
+    BL __aeabi_idivmod  // Call ARM's integer division with remainder
+
+    STR r1, [r2]        // Store the remainder (r1) at the memory address pointed by r2
+    BX lr               // Return (quotient is already in r0)
+
+divide_by_zero:
+    MOV r0, #-1         // Return -1 to indicate division by zero (or handle error)
+    BX lr
+
 
 ```
