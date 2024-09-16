@@ -6,7 +6,7 @@ draft: false
 ---
 ## Simple calculator in C and Assembly
 
-This is the C code for the fronted, should be under 'main.c'
+### This is the C code for the fronted, should be under 'main.c'
 
 ```C
 #include <stdio.h>
@@ -18,7 +18,7 @@ extern int multiply(int a, int b);
 extern int divide(int a, int b);
 
 int main() {
-    int choice, a, b, result;
+    int choice, a, b, result, remainder, quotient;
 
     while (1) {
         // Display the menu
@@ -34,6 +34,11 @@ int main() {
         if (choice == 5) {
             break; // Exit the loop if the user selects 5
         }
+        
+        else if (choice > 5) {
+			printf("Invalid choice, choose between 1 and 5\n");
+			break;
+		};
 
         // Ask for input numbers
         printf("Enter 1st integer: ");
@@ -56,76 +61,99 @@ int main() {
             result = multiply(a, b);
             printf("Result: %d\n", result);
             break;
-        case 4:
+		case 4:
             if (b == 0) {
                 printf("Error: Division by zero is not allowed.\n");
-            } else {
-                printf("Calling divide function...\n");
-                result = divide(a, b, &remainder);   // Pass address of remainder
-                if (result == -1) {
-                    printf("Error: Division by zero occurred.\n");
-                } else {
-                    printf("Quotient: %d, Remainder: %d\n", result, remainder);
-                }
-                printf("Returned from divide function...\n");
+            }
+            else {
+                quotient = divide(a, b);
+                asm("mov %0, r1" : "=r"(remainder)); //I moved the value from r0 directly to  the 'remainder' variable
+                printf("Result:\n", result);
+                printf("Quotient: %d, Remainder: %d\n", quotient, remainder);                
             }
             break;
-        default:
-            printf("Invalid choice. Please select between 1 and 5.\n");
-        }
-    }
-
+		};
+    
+    printf("\n");
     return 0;
+}	
+
 }
 
 ```
 
-This is Assembly code and be filed under 'operations.s'
+### This is Assembly code and be filed under 'operations.s'
 
 ``` assembly
 
-    .section .text
+.section .text
     .global add
-    .global subtract
-    .global multiply
-    .global divide
-
-// Add Function
 add:
     ADD r0, r0, r1      // r0 = r0 + r1
-    BX lr               // Return
+    bx lr               // Return
 
-// Subtract Function
+.section .text
+    .global subtract
 subtract:
     SUB r0, r0, r1      // r0 = r0 - r1
-    BX lr               // Return
+    bx lr               // Return
 
-// Multiply Function
+.section .text
+    .global multiply
 multiply:
     MUL r0, r0, r1      // r0 = r0 * r1
-    BX lr               // Return
+    bx lr               // Return
 
-// Divide Function (with integer division)
-    .section .text
+.section .text
     .global divide
-
-// Divide Function
-// r0 -> dividend
-// r1 -> divisor
-// r2 -> pointer to store remainder
-
 divide:
-    CMP r1, #0          // Check if divisor is zero
-    BEQ divide_by_zero  // Branch if divisor is zero (avoid division by zero)
+    push {r4, r5, r6, lr}   // Save registers
+    mov r4, r0              // r4 = dividend
+    mov r5, r1              // r5 = divisor
+    
 
-    BL __aeabi_idivmod  // Call ARM's integer division with remainder
+    // Initialize quotient and remainder as zero
+    mov r0, #0              // r0 = quotient
+    mov r1, #0              // r1 = remainder
+    mov r3, #0              // r3 = controls the sign flags
 
-    STR r1, [r2]        // Store the remainder (r1) at the memory address pointed by r2
-    BX lr               // Return (quotient is already in r0)
+    // Handle negative dividend
+    cmp r4, #0				// Compare divident with zero
+    bge dividend_positive   // If dividend is greater than or equal to
+							// zero then skip
+    neg r4, r4              // Make dividend positive
+    add r3, r3, #1          // Increment the sign flag
 
-divide_by_zero:
-    MOV r0, #-1         // Return -1 to indicate division by zero (or handle error)
-    BX lr
+dividend_positive:
+    // Handle negative divisor
+    cmp r5, #0				// Compare divisor by zero
+    bge divisor_positive    // If divisor is greater than or equal to
+							// zero then skip
+    neg r5, r5              // Make divisor positive
+    add r3, r3, #1          // Toggle the sign flag
+
+divisor_positive:
+    // Perform division by repeated subtraction
+division_loop:
+    cmp r4, r5              // Compare dividend and divisor
+    blt division_done       // If dividend is less than divisor,branch  
+							// to division_done 
+    sub r4, r4, r5          // Subtract divisor from dividend
+    add r0, r0, #1          // Increment quotient
+    b division_loop         // Repeat loop
+
+division_done:
+    mov r1, r4              // r1 is the remaining dividend
+
+    // Applies correct sign to the quotient by checking if num is even 
+    //or odd. Even is positive and odd is negative.
+    ands r6, r3, #1         // Check if sign flag is odd
+    beq result_positive     // If even, quotient is positive
+    neg r0, r0              // Make the quotient negative
+
+result_positive:
+    pop {r4, r5, r6, lr}    // Restore registers
+    bx lr                   // Return quotient in r0 and remainder in r1
 
 
 ```
