@@ -43,7 +43,7 @@ def get_base(content):
                 Div(
                     A("Home", href="/", cls="nav-link"),
                     A("Resume",href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
-                    #A("Posts", href="/posts", cls="nav-link"),
+                    A("Posts", href="/posts", cls="nav-link"),
                     #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
                 ),
@@ -120,6 +120,7 @@ def get_post(post: str):
     if md_file["draft"]:
         return RedirectResponse(url="/")
     return get_base(Markdown(md_file.content))
+
 
 
 '''@app.get("/papers/")

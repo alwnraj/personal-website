@@ -6,7 +6,9 @@ draft: false
 ---
 ## Simple calculator in C and Assembly
 
-### This is the C code for the fronted, should be under 'main.c'
+---------------------------------------------------------------------------
+
+#### This is the C code for the 'frontend', should be under 'main.c'
 
 ```C
 #include <stdio.h>
@@ -36,9 +38,9 @@ int main() {
         }
         
         else if (choice > 5) {
-			printf("Invalid choice, choose between 1 and 5\n");
-			break;
-		};
+   printf("Invalid choice, choose between 1 and 5\n");
+   break;
+  };
 
         // Ask for input numbers
         printf("Enter 1st integer: ");
@@ -61,7 +63,7 @@ int main() {
             result = multiply(a, b);
             printf("Result: %d\n", result);
             break;
-		case 4:
+  case 4:
             if (b == 0) {
                 printf("Error: Division by zero is not allowed.\n");
             }
@@ -72,17 +74,17 @@ int main() {
                 printf("Quotient: %d, Remainder: %d\n", quotient, remainder);                
             }
             break;
-		};
+  };
     
     printf("\n");
     return 0;
-}	
+} 
 
 }
 
 ```
 
-### This is Assembly code and be filed under 'operations.s'
+#### This is Assembly code and be filled under 'operations.s'
 
 ``` assembly
 
@@ -118,17 +120,17 @@ divide:
     mov r3, #0              // r3 = controls the sign flags
 
     // Handle negative dividend
-    cmp r4, #0				// Compare divident with zero
+    cmp r4, #0    // Compare divident with zero
     bge dividend_positive   // If dividend is greater than or equal to
-							// zero then skip
+       // zero then skip
     neg r4, r4              // Make dividend positive
     add r3, r3, #1          // Increment the sign flag
 
 dividend_positive:
     // Handle negative divisor
-    cmp r5, #0				// Compare divisor by zero
+    cmp r5, #0    // Compare divisor by zero
     bge divisor_positive    // If divisor is greater than or equal to
-							// zero then skip
+       // zero then skip
     neg r5, r5              // Make divisor positive
     add r3, r3, #1          // Toggle the sign flag
 
@@ -137,7 +139,7 @@ divisor_positive:
 division_loop:
     cmp r4, r5              // Compare dividend and divisor
     blt division_done       // If dividend is less than divisor,branch  
-							// to division_done 
+       // to division_done 
     sub r4, r4, r5          // Subtract divisor from dividend
     add r0, r0, #1          // Increment quotient
     b division_loop         // Repeat loop

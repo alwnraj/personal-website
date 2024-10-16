@@ -89,10 +89,53 @@ body {
 }
 
 .content {
-    background-color: #2a2a2a;
+    background-color: #2a2a2a; /* Current background color */
     border-radius: 5px;
     padding: 30px;
+    border: 1px solid #444; /* Add a subtle border */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
 }
+
+pre {
+    background-color: #2a2a2a; /* Darker background for the code block */
+    color: #e0e0e0; /* Text color for code */
+    padding: 15px; /* Space around the code */
+    border-radius: 5px; /* Rounded corners */
+    overflow-x: auto; /* Enable horizontal scrolling for long lines */
+    border: 1px solid #444; /* Add a border to create a box effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    margin: 20px 0; /* Add vertical spacing to separate it from other elements */
+}
+
+code {
+    background-color: transparent; /* No background for inline code */
+    color: #ffffff; /* Text color for inline code */
+    padding: 2px 4px; /* Padding for inline code */
+    border-radius: 3px; /* Rounded corners */
+}
+
+.code-container {
+    position: relative; /* Allows positioning of the button */
+}
+
+.copy-button {
+    position: absolute; /* Position button within the code block */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: #007bff; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.copy-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
 
 h2 {
     font-size: 24px;
