@@ -1,0 +1,6 @@
+User-agent: *   # Applies to all web crawlers
+Disallow: /posts/drafts/  # Disallow crawling of draft posts if applicable
+Disallow: /private/  # Disallow crawling of any private folders
+
+Allow: /posts/  # Allow crawling of the posts section
+Allow: /  # Allow crawling of the main site

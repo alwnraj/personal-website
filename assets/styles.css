@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 body {
-    /**background-color: #01242e;**/
     background-color: #1a1a1a;
     color: #e0e0e0;
     font-family: 'Courier Prime', monospace;
@@ -46,22 +45,21 @@ body {
     margin-bottom: 30px;
 }
 
-
 .profile-image {
     border-radius: 50%;
     width: 150px;
-    height: auto; /* Ensure the height adjusts automatically */
+    height: auto;
     object-fit: cover;
     margin-top: 15px;
     margin-right: 20px;
-    max-width: 100%; /* Prevent the image from stretching larger than its container */
+    max-width: 100%;
 }
 
 .profile-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 20px; /* Add space between profile picture and text */
+    margin-left: 20px;
 }
 
 .profile-info h1 {
@@ -89,53 +87,61 @@ body {
 }
 
 .content {
-    background-color: #2a2a2a; /* Current background color */
+    background-color: #2a2a2a;
     border-radius: 5px;
     padding: 30px;
-    border: 1px solid #444; /* Add a subtle border */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+    border: 1px solid #444;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Link styles in markdown content */
+.content a {
+    color: #00bfff; /* Use a lighter blue for better contrast */
+    text-decoration: underline;
+}
+
+.content a:hover {
+    color: #ffcc00; /* A bright color for hover state */
 }
 
 pre {
-    background-color: #2a2a2a; /* Darker background for the code block */
-    color: #e0e0e0; /* Text color for code */
-    padding: 15px; /* Space around the code */
-    border-radius: 5px; /* Rounded corners */
-    overflow-x: auto; /* Enable horizontal scrolling for long lines */
-    border: 1px solid #444; /* Add a border to create a box effect */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
-    margin: 20px 0; /* Add vertical spacing to separate it from other elements */
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    border: 1px solid #444;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
 }
 
 code {
-    background-color: transparent; /* No background for inline code */
-    color: #ffffff; /* Text color for inline code */
-    padding: 2px 4px; /* Padding for inline code */
-    border-radius: 3px; /* Rounded corners */
+    background-color: transparent;
+    color: #ffffff;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 .code-container {
-    position: relative; /* Allows positioning of the button */
+    position: relative;
 }
 
 .copy-button {
-    position: absolute; /* Position button within the code block */
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    background-color: #007bff; /* Button background color */
-    color: #ffffff; /* Button text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 5px 10px; /* Padding */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth background transition */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .copy-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
-
-
 
 h2 {
     font-size: 24px;
@@ -150,69 +156,66 @@ p {
 
 @media (max-width: 600px) {
     .profile {
-        flex-direction: column; /* Stack profile image and info vertically on mobile */
-        align-items: center; /* Center items horizontally */
+        flex-direction: column;
+        align-items: center;
     }
 
     .profile-image {
-        width: 80px; /* Adjust the width for mobile devices */
-        height: auto; /* Ensure the height adjusts automatically */
-        margin-right: 0; /* Remove right margin on mobile */
-        margin-bottom: 15px; /* Add space below image */
+        width: 80px;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
     }
 
     .profile-info {
-        margin-left: 0; /* Remove left margin on mobile */
-        text-align: center; /* Center text alignment */
+        margin-left: 0;
+        text-align: center;
     }
 
     .profile-info h1 {
-        font-size: 20px; /* Adjust font size for mobile devices */
+        font-size: 20px;
         margin-bottom: 5px;
     }
 
     .profile-info p {
-        font-size: 14px; /* Adjust font size for mobile devices */
+        font-size: 14px;
         margin-bottom: 10px;
     }
 
     .social-icons {
-        font-size: 16px; /* Adjust icon size for mobile devices */
+        font-size: 16px;
     }
 }
 
-/* courier-prime-regular - latin */
+/* Custom fonts */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
     font-family: 'Courier Prime';
     font-style: normal;
     font-weight: 400;
-    src: url('/fonts/courier-prime-v9-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('/fonts/courier-prime-v9-latin-regular.woff2') format('woff2');
 }
 
-/* courier-prime-italic - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
     font-family: 'Courier Prime';
     font-style: italic;
     font-weight: 400;
-    src: url('/fonts/courier-prime-v9-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('/fonts/courier-prime-v9-latin-italic.woff2') format('woff2');
 }
 
-/* courier-prime-700 - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
     font-family: 'Courier Prime';
     font-style: normal;
     font-weight: 700;
-    src: url('/fonts/courier-prime-v9-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('/fonts/courier-prime-v9-latin-700.woff2') format('woff2');
 }
 
-/* courier-prime-700italic - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
     font-family: 'Courier Prime';
     font-style: italic;
     font-weight: 700;
-    src: url('/fonts/courier-prime-v9-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-} 
+    src: url('/fonts/courier-prime-v9-latin-700italic.woff2') format('woff2');
+}

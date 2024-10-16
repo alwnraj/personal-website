@@ -1,8 +1,10 @@
+import datetime
 import pathlib
 from fasthtml.common import *
 from fh_bootstrap import bst_hdrs, Container, Image, Icon, ContainerT
 from markdown import markdown
 import frontmatter
+from starlette.responses import PlainTextResponse
 
 headers = (
     Link(
@@ -15,7 +17,10 @@ headers = (
         type="image/jpeg",
         href="/assets/logo.jpg",
     ),
+    # Meta tag for description
+    Meta(name="description", content="Welcome to Alwin Rajkumar's personal site, where you can find blog posts, resume, and more about my projects."),
     StyleX("assets/styles.css"),
+    
     *Socials(title="Alwin Rajkumar", description="Alwin's Personal Site", site_name="Alwin's Personal Site", image="assets/profile_picture.jpeg", url="https://personal-website-cyan-omega.vercel.app/"),
     Meta(name="viewport", content="width=device-width, initial-scale=1, viewport-fit=cover"),
     Meta(charset="utf-8"),
@@ -116,11 +121,41 @@ def get_post(post: str):
     post_path = pathlib.Path(f"posts/{post}.md")
     if not post_path.exists():
         return RedirectResponse(url="/")
+    
     md_file = frontmatter.load(post_path)
     if md_file["draft"]:
         return RedirectResponse(url="/")
-    return get_base(Markdown(md_file.content))
 
+    # Custom meta description for blog posts
+    post_description = md_file.get("description", "Read more about this post on Alwin Rajkumar's personal blog.")
+    
+    custom_headers = headers + (
+        Meta(name="description", content=post_description),
+    )
+    
+    return FastHTML(hdrs=bst_hdrs + custom_headers).get(get_base(Markdown(md_file.content)))
+
+
+# Function to generate the sitemap XML
+@app.get("/sitemap.xml")
+def sitemap():
+    # Your sitemap content goes here (this is just an example)
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+            <loc>https://personal-website-cyan-omega.vercel.app/</loc>
+            <lastmod>2024-10-16</lastmod>
+            <priority>1.00</priority>
+        </url>
+        <url>
+            <loc>https://personal-website-cyan-omega.vercel.app/posts</loc>
+            <lastmod>2024-10-16</lastmod>
+            <priority>0.80</priority>
+        </url>
+    </urlset>
+    """
+    
+    return PlainTextResponse(content=xml_content, media_type="application/xml")
 
 
 '''@app.get("/papers/")
