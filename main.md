@@ -6,16 +6,14 @@ Hello! I'm Alwin Rajkumar, a junior at the University of Louisville studying Com
 
 ## Personal Projects
 
-**Real-Time Chat application with Python, Flask & SocketIO:**
- Group chat-like application based on Flask-backend. Utilized HTML,CSS, and Javascript for Frontend.
-  [Source Code](https://www.github.com/alwnraj/chat-app)
+- **Real-Time Chat application with Python, Flask & SocketIO:**  
+Group chat-like application based on Flask-backend. Utilized HTML, CSS, and JavaScript for Frontend. [Source Code](https://www.github.com/alwnraj/chat-app)
 
-**Classic Pong Game with Python and Pygame:**
+- **Classic Pong Game with Python and Pygame:**
 Created a fully functional 2D Pong game using
-Python and the Pygame library. The game includes enhancements like dynamic ball speed and a central dashed line,
-delivering a retro gaming experience. [Source Code](https://www.github.com/alwnraj/pong)
+Python and the Pygame library. The game includes enhancements like dynamic ball speed and a central dashed line, delivering a retro gaming experience. [Source Code](https://www.github.com/alwnraj/pong)
 
-**2D Retro Space Invaders Game in C++:**  
+- **2D Retro Space Invaders Game in C++:**  
 Independently designed and developed a fully functional
 2D Retro Space Invaders game in C++ using Raylib, without the use of game engines. Created all game mechanics, including collision detection, scoring systems, and game physics
 [Source Code](https://www.github.com/alwnraj/Space-invaders)

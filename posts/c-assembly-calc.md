@@ -69,7 +69,8 @@ int main() {
             }
             else {
                 quotient = divide(a, b);
-                asm("mov %0, r1" : "=r"(remainder)); //I moved the value from r0 directly to  the 'remainder' variable
+                //I moved the value from r0 directly to  the 'remainder' variable
+                asm("mov %0, r1" : "=r"(remainder)); 
                 printf("Result:\n", result);
                 printf("Quotient: %d, Remainder: %d\n", quotient, remainder);                
             }

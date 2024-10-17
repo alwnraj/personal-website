@@ -133,7 +133,7 @@ def get_post(post: str):
         Meta(name="description", content=post_description),
     )
     
-    return FastHTML(hdrs=bst_hdrs + custom_headers).get(get_base(Markdown(md_file.content)))
+    return get_base(Markdown(md_file.content))
 
 
 # Function to generate the sitemap XML
