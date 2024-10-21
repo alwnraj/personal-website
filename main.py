@@ -1,100 +1,99 @@
-import datetime
 import pathlib
+from fastapi.responses import PlainTextResponse
 from fasthtml.common import *
+from fasthtml.js import HighlightJS
 from fh_bootstrap import bst_hdrs, Container, Image, Icon, ContainerT
-from markdown import markdown
 import frontmatter
-from starlette.responses import PlainTextResponse
+import markdown
 
+
+# Define headers
 headers = (
     Link(
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
         rel="stylesheet",
         type="text/css",
     ),
-    Link(  # Add the favicon link
-        rel="icon",
-        type="image/jpeg",
-        href="/assets/logo.jpg",
+    StyleX("assets/styles.css"),
+    Script(src="https://unpkg.com/htmx.org@next/dist/htmx.min.js"),
+    *HighlightJS(
+        langs=["python", "html", "yaml", "bash", "sh", "powershell", "dockerfile"],
+        dark="a11y-dark",
     ),
-    # Meta tag for description
+    Favicon("/assets/favicon.ico", "/assets/favicon.ico"),
+    Meta(
+        name="viewport",
+        content="width=device-width, initial-scale=1, viewport-fit=cover",
+    ),
     Meta(name="description", content="Welcome to Alwin Rajkumar's personal site, where you can find blog posts, resume, and more about my projects."),
     StyleX("assets/styles.css"),
-    
-    *Socials(title="Alwin Rajkumar", description="Alwin's Personal Site", site_name="Alwin's Personal Site", image="assets/profile_picture.jpeg", url="https://personal-website-cyan-omega.vercel.app/"),
+    *Socials(
+        title="Alwin Rajkumar", 
+        description="Alwin's Personal Site", 
+        site_name="Alwin's Personal Site", 
+        image="assets/profile_picture.jpeg", 
+        url="https://personal-website-cyan-omega.vercel.app/"
+    ),
     Meta(name="viewport", content="width=device-width, initial-scale=1, viewport-fit=cover"),
     Meta(charset="utf-8"),
 )
 
-
+# 404 handler
 async def not_found(request, exc):
     return RedirectResponse(url="/")
 
+# App configuration
+exception_handlers = {404: not_found}
 
-exception_handlers = {
-    404: not_found
-}
-
-app = FastHTML(hdrs=bst_hdrs + headers, live=False, default_hdrs=False, exception_handlers=exception_handlers)
+app = FastHTML(
+    hdrs=bst_hdrs + headers, 
+    live=False, 
+    default_hdrs=False, 
+    exception_handlers=exception_handlers
+)
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 app.mount("/posts/img", StaticFiles(directory="posts/img"), name="posts_img")
 
-
-def get_base(content):
+# Base template function
+def get_base(*contents):
     return (
         Title("Alwin Rajkumar"),
         Container(
             Nav(
                 Div(
                     A("Home", href="/", cls="nav-link"),
-                    A("Resume",href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
+                    A("Resume", href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
                     A("Posts", href="/posts", cls="nav-link"),
-                    #A("Papers", href="/papers", cls="nav-link"),
                     cls="nav-links",
                 ),
                 cls="navbar",
             ),
             Div(
-                Image(
-                    "/assets/profile_picture.jpeg",
-                    alt="Alwin Rajkumar",
-                    cls="profile-image",
-                ),
+                Image("/assets/profile_picture.jpeg", alt="Alwin Rajkumar", cls="profile-image"),
                 Div(
                     H1("Alwin Rajkumar"),
                     P("University of Louisville | Computer Science & Engineering"),
                     Div(
-                        #Icon("fab fa-x-twitter fa-sm", href="www.twitter.com/xceron_", button=False),
-                        Icon("fab fa-github fa-sm", href="https://github.com/alwnraj?tab=overview&from=2024-07-01&to=2024-07-04", button=False),
-                        Icon("fab fa-linkedin fa-sm", href="https://www.linkedin.com/in/alwin-rajkumar-3734a12ab/",
-                             button=False),
-                        #Icon("fab fa-discord fa-sm", href="https://discord.com/users/1233745701243195433",
-                             #button=False),
-                        Icon("fas fa-at fa-sm", href="mailto:alwin.rajkumar@louisville.edu", button=False),
+                        Icon("fab fa-github fa-sm", href="https://github.com/alwnraj", button=False),
+                        Icon("fab fa-linkedin fa-sm", href="https://www.linkedin.com/in/Alwin-Rajkumar/", button=False),
+                        Icon("fas fa-at fa-sm", href="mailto:Alwin.Rajkumar@louisville.edu", button=False),
                         cls="social-icons",
                     ),
                     cls="profile-info",
                 ),
                 cls="profile",
             ),
-            Div(
-                content,
-                cls="content",
-            ),
+            Div(*contents, cls="content"),  # unpack the contents here
             typ=ContainerT.Sm,
         )
     )
 
-    
 
-
+# Markdown configuration
 md_exts = ('codehilite', 'smarty', 'extra', 'attr_list', 'toc')
 
-
 def Markdown(s, exts=md_exts, **kw):
-    # https://github.com/AnswerDotAI/fh-about/blob/7e5109c26ba2f4fcba897cc83add6ee74621ed20/app.py#L6
-    return Div(NotStr(markdown(s, extensions=exts)), **kw)
-
+    return Div(NotStr(markdown.markdown(s, extensions=exts)), **kw)
 
 @app.get("/")
 def home():
