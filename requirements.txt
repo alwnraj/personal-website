@@ -3,6 +3,7 @@ beautifulsoup4==4.12.3
 certifi==2024.8.30
 click==8.1.7
 colorama==0.4.6
+fastapi==0.95.0  # Add this line for FastAPI
 fastcore==1.7.19
 fastlite==0.0.11
 fh-bootstrap==0.0.3
