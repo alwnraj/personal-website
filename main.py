@@ -1,13 +1,17 @@
+import html
 import pathlib
+from typing import Text
 from fastapi.responses import PlainTextResponse
 from fasthtml.common import *
 from fasthtml.js import HighlightJS
 from fh_bootstrap import bst_hdrs, Container, Image, Icon, ContainerT
 import frontmatter
 import markdown
+from markdown_it import MarkdownIt
+from mdit_py_plugins.front_matter import front_matter_plugin
+from mdit_py_plugins.footnote import footnote_plugin
+from mdit_py_plugins.anchors import anchors_plugin
 
-
-# Define headers
 headers = (
     Link(
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css",
@@ -15,25 +19,20 @@ headers = (
         type="text/css",
     ),
     StyleX("assets/styles.css"),
-    Script(src="https://unpkg.com/htmx.org@next/dist/htmx.min.js"),
+    #Script(src="https://unpkg.com/htmx.org@next/dist/htmx.min.js"),
     *HighlightJS(
-        langs=["python", "html", "yaml", "bash", "sh", "powershell", "dockerfile"],
-        dark="a11y-dark",
+        langs=["python", "html", "yaml", "bash", "sh", "powershell", "dockerfile", "armasm"],
     ),
     Favicon("/assets/favicon.ico", "/assets/favicon.ico"),
     Meta(
         name="viewport",
         content="width=device-width, initial-scale=1, viewport-fit=cover",
     ),
-    Meta(name="description", content="Welcome to Alwin Rajkumar's personal site, where you can find blog posts, resume, and more about my projects."),
+    # Meta tag for description
+    Meta(name="description", content="Welcome to alwin Rajkumar's personal site, where you can find blog posts, resume, and more about my projects."),
     StyleX("assets/styles.css"),
-    *Socials(
-        title="Alwin Rajkumar", 
-        description="Alwin's Personal Site", 
-        site_name="Alwin's Personal Site", 
-        image="assets/profile_picture.jpeg", 
-        url="https://personal-website-cyan-omega.vercel.app/"
-    ),
+    
+    *Socials(title="Alwin Rajkumar", description="Alwin's Personal Site", site_name="Alwin's Personal Site", image="assets/profile_picture.jpeg", url="https://alwinrajkumar.vercel.app/"),
     Meta(name="viewport", content="width=device-width, initial-scale=1, viewport-fit=cover"),
     Meta(charset="utf-8"),
 )
@@ -76,14 +75,17 @@ def get_base(*contents):
                     Div(
                         Icon("fab fa-github fa-sm", href="https://github.com/alwnraj", button=False),
                         Icon("fab fa-linkedin fa-sm", href="https://www.linkedin.com/in/Alwin-Rajkumar/", button=False),
-                        Icon("fas fa-at fa-sm", href="mailto:Alwin.Rajkumar@louisville.edu", button=False),
+                        Icon("fas fa-at fa-sm", href="mailto:alwin.rajkumar@louisville.edu", button=False),
                         cls="social-icons",
                     ),
                     cls="profile-info",
                 ),
                 cls="profile",
             ),
-            Div(*contents, cls="content"),  # unpack the contents here
+            Div(
+                *contents,  # unpack the contents here
+                cls="content no-indent"  # add a class to handle no indentation
+            ),
             typ=ContainerT.Sm,
         )
     )
@@ -97,9 +99,49 @@ def Markdown(s, exts=md_exts, **kw):
 
 @app.get("/")
 def home():
+    # Read the markdown content
     with open('main.md', 'r') as file:
         content = file.read()
-    return get_base(Markdown(content))
+        
+    # Personal projects list with your actual project details
+    projects = [
+        {
+            "name": "Real-Time Chat application with Python, Flask & SocketIO",
+            "url": "https://www.github.com/alwnraj/chat-app",
+            "description": "Group chat-like application based on Flask-backend. Utilized HTML, CSS, and JavaScript for Frontend."
+        },
+        {
+            "name": "Classic Pong Game with Python and Pygame",
+            "url": "https://www.github.com/alwnraj/pong",
+            "description": "Created a fully functional 2D Pong game using Python and the Pygame library."
+        },
+        {
+            "name": "2D Retro Space Invaders Game in C++",
+            "url": "https://www.github.com/alwnraj/Space-invaders",
+            "description": "Independently designed and developed a fully functional 2D Retro Space Invaders game in C++ using Raylib, without the use of game engines."
+        },
+    ]
+    
+    # Generate the project links with descriptions
+    project_links = Ul(*[
+        Li(
+            A(project["name"], href=project["url"]),
+            Text(f" - {project['description']}")
+        ) for project in projects
+    ])
+    
+    # Return the complete page
+    return get_base(
+        Html(
+            Body(
+                H2("About"),
+                Markdown(content),
+                H2("Personal Projects"),
+                project_links
+            )
+        )
+    )
+
 
 
 @app.get("/posts/")
@@ -142,7 +184,7 @@ def sitemap():
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
-            <loc>https://personal-website-cyan-omega.vercel.app/</loc>
+            <loc>https://alwinrajkumar.vercel.app/</loc>
             <lastmod>2024-10-16</lastmod>
             <priority>1.00</priority>
         </url>

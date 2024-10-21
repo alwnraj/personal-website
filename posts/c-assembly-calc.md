@@ -87,7 +87,7 @@ int main() {
 
 #### This is Assembly code and be filled under 'operations.s'
 
-``` assembly
+```asm
 
 .section .text
     .global add
@@ -113,7 +113,6 @@ divide:
     push {r4, r5, r6, lr}   // Save registers
     mov r4, r0              // r4 = dividend
     mov r5, r1              // r5 = divisor
-    
 
     // Initialize quotient and remainder as zero
     mov r0, #0              // r0 = quotient
@@ -157,6 +156,5 @@ division_done:
 result_positive:
     pop {r4, r5, r6, lr}    // Restore registers
     bx lr                   // Return quotient in r0 and remainder in r1
-
 
 ```
