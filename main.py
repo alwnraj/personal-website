@@ -19,7 +19,7 @@ headers = (
         type="text/css",
     ),
     StyleX("assets/styles.css"),
-    #Script(src="https://unpkg.com/htmx.org@next/dist/htmx.min.js"),
+    Script(src="https://unpkg.com/htmx.org@next/dist/htmx.min.js"),
     *HighlightJS(
         langs=["python", "html", "yaml", "bash", "sh", "powershell", "dockerfile", "armasm"],
     ),
@@ -134,7 +134,6 @@ def home():
     return get_base(
         Html(
             Body(
-                H2("About"),
                 Markdown(content),
                 H2("Personal Projects"),
                 project_links
@@ -154,7 +153,7 @@ def posts():
             content = frontmatter.load(post_file)
             if not content["draft"]:
                 links.append(Li(content["date"], A(content["title"], href=f"/posts/{file}")))
-    return get_base(Div(H2("Posts"), Ul(*links)))
+    return get_base(Div(H2("Posts"),Ul(*links)))
 
 
 @app.get("/posts/{post}")
@@ -189,7 +188,7 @@ def sitemap():
             <priority>1.00</priority>
         </url>
         <url>
-            <loc>https://personal-website-cyan-omega.vercel.app/posts</loc>
+            <loc>ttps://alwinrajkumar.vercel.app/posts</loc>
             <lastmod>2024-10-16</lastmod>
             <priority>0.80</priority>
         </url>
