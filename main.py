@@ -152,7 +152,7 @@ def posts():
         with open(f"posts/{file}.md", 'r') as post_file:
             content = frontmatter.load(post_file)
             if not content["draft"]:
-                links.append(Li(content["date"], A(content["title"], href=f"/posts/{file}")))
+                links.append(Li(f"{content['date']}  ", A(content["title"], href=f"/posts/{file}")))
     return get_base(Div(H2("Posts"),Ul(*links)))
 
 
