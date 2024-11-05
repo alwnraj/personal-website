@@ -62,7 +62,7 @@ def get_base(*contents):
                 Div(
                     A("Home", href="/", cls="nav-link"),
                     A("Resume", href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
-                    A("Posts", href="/posts", cls="nav-link"),
+                    #A("Posts", href="/posts", cls="nav-link"),
                     cls="nav-links",
                 ),
                 cls="navbar",
@@ -142,7 +142,7 @@ def home():
     )
 
 
-
+'''
 @app.get("/posts/")
 def posts():
     blog_dir = pathlib.Path("posts")
@@ -174,6 +174,8 @@ def get_post(post: str):
     )
     
     return get_base(Markdown(md_file.content))
+    
+'''
 
 
 # Function to generate the sitemap XML
