@@ -1,9 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-
 body {
     background-color: #1a1a1a;
     color: #e0e0e0;
-    font-family: 'Courier Prime', monospace;
+    font-family: "Georgia", "Times", serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -46,20 +44,17 @@ body {
 }
 
 .profile-image {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    width: 150px;
-    height: auto;
     object-fit: cover;
-    margin-top: 15px;
-    margin-right: 20px;
-    max-width: 100%;
+    margin-right: 25px;
 }
 
 .profile-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 20px;
 }
 
 .profile-info h1 {
@@ -90,282 +85,67 @@ body {
     background-color: #2a2a2a;
     border-radius: 5px;
     padding: 30px;
-    border: 1px solid #444;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Link styles in markdown content */
-.content a {
-    color: #00bfff; /* Use a lighter blue for better contrast */
-    text-decoration: underline;
-}
-
-.content a:hover {
-    color: #ffcc00; /* A bright color for hover state */
-}
-
-/**pre {
-    background-color: #51585d;
-    color: #e0e0e0;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-    border: 1px solid #444;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    margin: 20px 0;
-}**/
-
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #f8f8f2;
-	background: none;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: 0.5em 0;
-	overflow: auto;
-	border-radius: 0.3em;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #2b2b2b;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: 0.1em;
-	border-radius: 0.3em;
-	white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #d4d0ab;
-}
-
-.token.punctuation {
-	color: #fefefe;
-}
-
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #ffa07a;
-}
-
-.token.boolean,
-.token.number {
-	color: #00e0e0;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #abe338;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: #00e0e0;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.function {
-	color: #ffd700;
-}
-
-.token.keyword {
-	color: #00e0e0;
-}
-
-.token.regex,
-.token.important {
-	color: #ffd700;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
-
-@media screen and (-ms-high-contrast: active) {
-	code[class*="language-"],
-	pre[class*="language-"] {
-		color: windowText;
-		background: window;
-	}
-
-	:not(pre) > code[class*="language-"],
-	pre[class*="language-"] {
-		background: window;
-	}
-
-	.token.important {
-		background: highlight;
-		color: window;
-		font-weight: normal;
-	}
-
-	.token.atrule,
-	.token.attr-value,
-	.token.function,
-	.token.keyword,
-	.token.operator,
-	.token.selector {
-		font-weight: bold;
-	}
-
-	.token.attr-value,
-	.token.comment,
-	.token.doctype,
-	.token.function,
-	.token.keyword,
-	.token.operator,
-	.token.property,
-	.token.string {
-		color: highlight;
-	}
-
-	.token.attr-value,
-	.token.url {
-		font-weight: normal;
-	}
-}
-
-
-.code-container {
-    position: relative;
-}
-
-.copy-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.copy-button:hover {
-    background-color: #0056b3;
 }
 
 h2 {
     font-size: 24px;
-    color: #ffffff;
     margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
 }
 
 p {
     font-size: 16px;
-    margin-left: 20px;
 }
 
-@media (max-width: 600px) {
-    .profile {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .profile-image {
-        width: 80px;
-        height: auto;
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-
-    .profile-info {
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .profile-info h1 {
-        font-size: 20px;
-        margin-bottom: 5px;
-    }
-
-    .profile-info p {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    .social-icons {
-        font-size: 16px;
-    }
+img {
+    max-width: 100%;
 }
 
-/* Custom fonts */
-@font-face {
-    font-display: swap;
-    font-family: 'Courier Prime';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/fonts/courier-prime-v9-latin-regular.woff2') format('woff2');
+a {
+    color: #4dd0e1;
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'Courier Prime';
-    font-style: italic;
-    font-weight: 400;
-    src: url('/fonts/courier-prime-v9-latin-italic.woff2') format('woff2');
+code {
+    color: #ff7f50;
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'Courier Prime';
-    font-style: normal;
-    font-weight: 700;
-    src: url('/fonts/courier-prime-v9-latin-700.woff2') format('woff2');
+.header-anchor {
+    text-decoration: none;
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'Courier Prime';
-    font-style: italic;
-    font-weight: 700;
-    src: url('/fonts/courier-prime-v9-latin-700italic.woff2') format('woff2');
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+th, td {
+    border: 2px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+
+
+/* Mobile styles */
+@media screen and (max-width: 640px) {
+    .content {
+        border-radius: 0;
+        padding: 15px 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .container-sm {
+        max-width: 100% !important;
+        padding: 0;
+    }
 }

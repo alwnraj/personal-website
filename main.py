@@ -11,6 +11,7 @@ from markdown_it import MarkdownIt
 from mdit_py_plugins.front_matter import front_matter_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.anchors import anchors_plugin
+from datetime import datetime
 
 headers = (
     Link(
@@ -62,7 +63,7 @@ def get_base(*contents):
                 Div(
                     A("Home", href="/", cls="nav-link"),
                     A("Resume", href="/assets/Resume.pdf", cls="nav-link", target="_blank"),
-                    #A("Posts", href="/posts", cls="nav-link"),
+                    A("Posts", href="/posts", cls="nav-link"),
                     cls="nav-links",
                 ),
                 cls="navbar",
@@ -140,20 +141,41 @@ def home():
             )
         )
     )
-
-
-'''
+'''   
 @app.get("/posts/")
 def posts():
     blog_dir = pathlib.Path("posts")
     blog_files = [file.stem for file in blog_dir.glob("*.md")]
     links = []
     for file in blog_files:
-        with open(f"posts/{file}.md", 'r') as post_file:
+        with open(f"posts/{file}.md", "r", encoding="utf-8") as post_file:
             content = frontmatter.load(post_file)
-            if not content["draft"]:
-                links.append(Li(f"{content['date']}  ", A(content["title"], href=f"/posts/{file}")))
-    return get_base(Div(H2("Posts"),Ul(*links)))
+            if "draft" in content and not content["draft"]:
+                links.append(Li(content["date"], " ", A(content["title"], href=f"/posts/{file}")))
+    links = sorted(links, key=lambda x: x[0], reverse=True)
+    return get_base(
+        (
+            Div(H2("Posts"), Ul(*links)),
+        )
+    )
+'''
+
+@app.get("/posts/")
+def posts():
+    blog_dir = pathlib.Path("posts")
+    blog_files = [file.stem for file in blog_dir.glob("*.md")]
+    links = []
+    for file in blog_files:
+        with open(f"posts/{file}.md", "r", encoding="utf-8") as post_file:
+            content = frontmatter.load(post_file)
+            if "draft" in content and not content["draft"]:
+                links.append(Li(content["date"], " ", A(content["title"], href=f"/posts/{file}")))
+    links = sorted(links, key=lambda x: x[0], reverse=True)
+    return get_base(
+        (
+            Div(H2("Posts"), Ul(*links)),
+        )
+    )
 
 
 @app.get("/posts/{post}")
@@ -175,7 +197,6 @@ def get_post(post: str):
     
     return get_base(Markdown(md_file.content))
     
-'''
 
 
 # Function to generate the sitemap XML
