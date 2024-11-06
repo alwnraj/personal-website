@@ -74,7 +74,7 @@ def get_base(*contents):
                     P("University of Louisville | Computer Science & Engineering"),
                     Div(
                         Icon("fab fa-github fa-sm", href="https://github.com/alwnraj", button=False),
-                        Icon("fab fa-linkedin fa-sm", href="https://www.linkedin.com/in/Alwin-Rajkumar/", button=False),
+                        Icon("fab fa-linkedin fa-sm", href="https://www.linkedin.com/in/alwinrajkumar/", button=False),
                         Icon("fas fa-at fa-sm", href="mailto:alwin.rajkumar@louisville.edu", button=False),
                         cls="social-icons",
                     ),
